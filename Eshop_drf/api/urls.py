@@ -5,6 +5,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from .views import CustomerList, CustomerView
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -20,8 +21,10 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('customer-list', views.customer_list),
-    path('customer/<int:id>', views.customer_details),
+    # path('customer-list', views.customer_list),
+    # path('customer/<int:id>', views.customer_details),
+    path('customer-list', CustomerList.as_view(), name="customer"),
+    path('customer/<int:pk>', CustomerView.as_view(), name="customer-detail"),
     path('vendor-list', views.vendor_list),
     path('vendor/<int:id>', views.vendor_details),
     path('product-list', views.product_list),

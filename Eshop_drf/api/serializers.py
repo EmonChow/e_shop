@@ -16,16 +16,18 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = "__all__"
-
-
 class PurchaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Purchase
+        fields = "__all__"
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    purchase = PurchaseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
         fields = "__all__"
 
 
