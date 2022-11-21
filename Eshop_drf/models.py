@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -42,9 +43,13 @@ class Product(models.Model):
 class Purchase(models.Model):
     quantity = models.IntegerField()
     date = models.DateField()
-    total_price = models.FloatField()
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='purchase')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='purchase')
     vendor_id = models.OneToOneField(Vendor, on_delete=models.CASCADE)
+
+    @property
+    def total_price(self):
+        price = self.quantity * self.product.price
+        return price
 
 
 class Sales(models.Model):

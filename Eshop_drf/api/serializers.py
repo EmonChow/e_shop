@@ -17,10 +17,12 @@ class VendorSerializer(serializers.ModelSerializer):
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
+    total_price = serializers.ReadOnlyField()
 
     class Meta:
+
         model = Purchase
-        fields = "__all__"
+        fields = ['quantity', 'date', 'product', 'total_price', 'vendor_id']
 
 
 class ProductSerializer(serializers.ModelSerializer):
