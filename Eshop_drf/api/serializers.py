@@ -34,6 +34,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class SalesSerializer(serializers.ModelSerializer):
+    total_price = serializers.ReadOnlyField()
+
     class Meta:
         model = Sales
-        fields = "__all__"
+        fields = ['quantity', 'date', 'product_id', 'total_price', 'customer_id']
